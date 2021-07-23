@@ -7,24 +7,15 @@
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------#
 use strict;
 use LWP::UserAgent;
-use Data::Dumper;
+#use Data::Dumper;
 use JSON;
 use JSON::XS qw(encode_json);
-use List::Util qw(sum);
 use Config::Tiny;
-use feature qw{say};
 use DateTime;
-use Date::Calc qw(:all);
-use URI::Encode;
 
 #EXCEL MODULES
 use Excel::Writer::XLSX;
 use Excel::Writer::XLSX::Utility;
-use Spreadsheet::XLSX;
-use Spreadsheet::ParseExcel::Utility qw(ExcelFmt);
-use Spreadsheet::ParseExcel;
-use Spreadsheet::ParseExcel::SaveParser;
-use Text::Iconv;
 
 #CONSTANTS
 use constant L_ERROR 	=> "ERROR";
