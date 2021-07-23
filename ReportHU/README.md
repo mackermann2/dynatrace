@@ -2,7 +2,7 @@
 
 This script is able to extract the details of the HUs consumption for one or several specific Dynatrace tenants. 
 
-## Features
+## Description
 - List of all monitored hosts on the tenant with the amount of HU consummed for each one (in separate Excel sheets)
 - Amount of HU consumed per Management Zone 
 - Excel file generation 
@@ -86,3 +86,4 @@ INFO [07/23/21 15:08:13] main - End of script
 ``` 
 ## Results
 
+![alt text](https://github.com/mackermann2/dynatrace/blob/main/ReportHU/screenshot_exportHU_sample.png)
