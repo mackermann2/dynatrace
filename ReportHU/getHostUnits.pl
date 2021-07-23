@@ -219,7 +219,7 @@ sub paramCell {
 		        );
 	}
 
-	elsif ( $type eq 'mois' ){
+	elsif ( $type eq 'entete2' ){
 		my $bg_color = $refExcel->set_custom_color(41, 218, 238, 243);
 		$format = $refExcel->add_format(
 		        font => 'Calibri',
@@ -233,16 +233,6 @@ sub paramCell {
 		        align => 'vcenter',
 		        num_format => 'mmm-yy'
 	        );
-	}
-
-	elsif ( $type eq 'legende'){
-		$format = $refExcel->add_format(
-		        font => 'Calibri',
-		        center_across => 1,
-		        bold => 1,
-		        size => 11,
-		        border => 1
-		        );
 	}
 	else{
                 $format = $refExcel->add_format(
@@ -366,7 +356,7 @@ sub createExcel {
 						$refSheet->write($j+3,1, $mgtZones{$tenant}{$mgtZone},$format);
 						$j++;
 					}
-					$format = &paramCell($refExcel,"mois");
+					$format = &paramCell($refExcel,"entete2");
 					$refSheet->write($j+4,0, "TOTAL MONITORED SERVERS",$format);
 					$refSheet->write($j+5,0, "TOTAL CONSUMED HOST UNITS",$format);
 
