@@ -1,2 +1,2 @@
 # dynatrace
-Customization around Dynatrace (custom scripts, integration etc.)
+Customization around Dynatrace (custom scripts, integration, reporting etc.)
