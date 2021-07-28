@@ -69,7 +69,11 @@ sub log (){
 
 	my $logType = $_[0];
 	my $logMess = $_[1];
-	chop (my $Date = `/bin/date "+[%x %H:%M:%S]"`);
+	#chop (my $Date = `/bin/date "+[%x %H:%M:%S]"`);
+	my $dt = DateTime->now;
+	my $ymd = $dt->ymd;
+	my $hms = $dt->hms;
+	my $Date = "[".$ymd." ".$hms."]";
 
 	open LOGFILE, ">> $LOG_FILE";
 	print LOGFILE "$logType $Date $logMess\n";
