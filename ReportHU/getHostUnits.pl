@@ -3,7 +3,7 @@
 # AUTHOR        : Ackermann Matthieu
 # DATE          : 2021-07-23
 # DESCRIPTION   : Export in an Excel file of the Dynatrace Host Units consumption (Oneagent licenses) in SaaS mode 
-# UPDATE        : 
+# UPDATE        : 2021-09-06: Modification of log() function : bash command depreciated to run script on non-unix environment (using of DateTime module instead)
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------#
 use strict;
 use LWP::UserAgent;
