@@ -787,8 +787,6 @@ sub createExcel {
 								# Calculation of the evolution rate
 								my $cell_previous_value = xl_rowcol_to_cell( $i, $col);
 								my $cell_latest_value = xl_rowcol_to_cell( $i+1, $col);
-								#$refSheet->write($i+1,$col+1, "=(($cell_latest_value-$cell_previous_value)/$cell_previous_value)",$cell_format);
-								#$refSheet->write($i+1,$col+1, "=IFERROR(($cell_latest_value-$cell_previous_value)/$cell_previous_value;IF($cell_latest_value<>0;1;0))",$cell_format);
 								$refSheet->write($i+1,$col+1, "=IFERROR( ($cell_latest_value-$cell_previous_value)/$cell_previous_value, IF($cell_latest_value<>0,1,0) )",$cell_format);
 								# Write a conditional format over a range.
 								my $green = $refExcel->add_format( bold => 1 , color => "green", align => 'right' );
@@ -839,21 +837,14 @@ sub createExcel {
 							else{
 								$refSheet->write($i+3,$k+1, "N/A",$format);
 							}
-							#$totalLimit=$totalLimit+$threshold;
 							$refSheet->write($i+2,$k+1, $threshold,$format);
 							$k=$k+2;
 						}
-						#$format = &paramCell($refExcel,"body");
-						#$refSheet->write($i+2,1, $threshold,$format);
-						#$refSheet->write($i+3,1, "{=SUM(B2:B".($i+1).")*100/$threshold}",$format);
 					}
-					#$refSheet->write($i+2,1, $conf->{$section}->{"limitDEM"},$format);
 					#IF NO MANAGEMENT ZONE IS DEFINED
-					#else{
 					$format = &paramCell($refExcel,"body");
 					$refSheet->write($i+2,1, $conf->{$section}->{"limitDEM"},$format);
 					$refSheet->write($i+3,1, "=SUM(B2:B".($i+1).")*100/".$conf->{$section}->{"limitDEM"},$format);
-					#}
 				}				
 			}
 
@@ -915,30 +906,11 @@ my ($refExcel,$refSheet,$refWorkSheet) = @_;
                       $format = &paramCell($refExcel,"mois");
                       $refWorkSheet->write($row,$col,$refSheet -> {Cells} [$row] [$col]->value,$format);
                 }
-               elsif ($col != 0 && $col % 2 == 0){
+                elsif ($col != 0 && $col % 2 == 0){
                       $format = &paramCell($refExcel,"trend");
 					  $refWorkSheet->write($row,$col, $refSheet -> {Cells} [$row] [$col]{Val}, $format);
-			   }
-				#	my $color;
-				#	my $shape;
-				#	if ($refSheet -> {Cells} [$row] [$col]->value =~ '\+'){
-				#		$color="green";
-				#		$shape = $refExcel->add_shape(type => 'mathPlus', id => 1, width => 20, height => 20, fill => '7DCEA0', line => '196F3D', line_weight => 2);
-				#	}
-				#	elsif($refSheet -> {Cells} [$row] [$col]->value =~ '\-'){
-				#		$color="red";
-				#		$shape = $refExcel->add_shape(type => 'mathMinus', id => 2, width => 20, height => 20, fill => 'CD6155', line => '922B21', line_weight => 2);
-				#	}
-				#	else{
-				#		$color="blue";
-				#		$shape = $refExcel->add_shape(type => 'mathEqual', id => 3, width => 20, height => 20, fill => '5499C7', line => '1F618D', line_weight => 2);
-				#	}
-
-				#	my $style = $refExcel->add_format( bold => 1 , color => $color, align => 'right' );
-				#	$refWorkSheet->write_rich_string($row,$col, $style, $refSheet -> {Cells} [$row] [$col]->value, $format);
-				#	$refWorkSheet->insert_shape($row,$col, $shape,1,1);
-               #}
-                else{
+			    }
+            	else{
                     $format = &paramCell($refExcel,"body");
                     $refWorkSheet->write($row,$col,$refSheet -> {Cells} [$row] [$col]->value,$format);
                 }
@@ -971,10 +943,10 @@ my ($refExcel,$refSheet,$refWorkSheet,$refdate) = @_;
 	$apitoken = $conf->{$section}->{"token"};
 	
 	#SHAPES CREATION
-	#my $style = $refExcel->add_format();
-	my $shape_plus = $refExcel->add_shape(type => 'mathPlus', id => 1, width => 20, height => 20, fill => '7DCEA0', line => '196F3D', line_weight => 2);
-	my $shape_minus = $refExcel->add_shape(type => 'mathMinus', id => 2, width => 20, height => 20, fill => 'CD6155', line => '922B21', line_weight => 2);
-	my $shape_equal = $refExcel->add_shape(type => 'mathEqual', id => 3, width => 20, height => 20, fill => '5499C7', line => '1F618D', line_weight => 2);
+	# not used anymore
+	#my $shape_plus = $refExcel->add_shape(type => 'mathPlus', id => 1, width => 20, height => 20, fill => '7DCEA0', line => '196F3D', line_weight => 2);
+	#my $shape_minus = $refExcel->add_shape(type => 'mathMinus', id => 2, width => 20, height => 20, fill => 'CD6155', line => '922B21', line_weight => 2);
+	#my $shape_equal = $refExcel->add_shape(type => 'mathEqual', id => 3, width => 20, height => 20, fill => '5499C7', line => '1F618D', line_weight => 2);
 	#SHEET SELECTION
 	my $refSheet = $refExcel->get_worksheet_by_name($section);
 
@@ -1041,8 +1013,6 @@ my ($refExcel,$refSheet,$refWorkSheet,$refdate) = @_;
 						$refSheet->write_rich_string($i+1,$compteur+1, "",$cell_format);
 						$refSheet->set_column($compteur+1, $compteur+1, 10);
 					}
-					#UPDATE THE OLD VALUE WITH THE NEW VALUE (next month) TO COMPARE AT THE NEXT LOOP
-					$old_value = $totalDEM;
 					$refSheet->set_column(3, $compteur, 22);
 			}
 			$compteur=$compteur+2;
@@ -1094,10 +1064,7 @@ my ($refExcel,$refSheet,$refWorkSheet,$refdate) = @_;
 			$cell_format = &paramCell($refExcel,"trend");
 			$refSheet->write($i+1,1, $totalDEM,$format);
 			$refSheet->write_rich_string($i+1,$col+1, "-",$cell_format);
-		}
-		#UPDATE THE OLD VALUE WITH THE NEW VALUE (next month) TO COMPARE AT THE NEXT LOOP
-		$old_value = $totalDEM;
-		
+		}		
 	}
 	$col++;
 	#"FOOTER" 
@@ -1133,17 +1100,10 @@ my ($refExcel,$refSheet,$refWorkSheet,$refdate) = @_;
 			$refSheet->write($i+2,$k+1, $threshold,$format);
 			$k=$k+2;
 		}
-		#$format = &paramCell($refExcel,"body");
-		#$refSheet->write($i+2,1, $threshold,$format);
-		#$refSheet->write($i+3,1, "{=SUM(B2:B".($i+1).")*100/$threshold}",$format);
 	}
-	#$refSheet->write($i+2,1, $conf->{$section}->{"limitDEM"},$format);
-	#IF NO MANAGEMENT ZONE IS DEFINED
-	#else{
 	$format = &paramCell($refExcel,"body");
 	$refSheet->write($i+2,1, $conf->{$section}->{"limitDEM"},$format);
 	$refSheet->write($i+3,1, "=SUM(B2:B".($i+1).")*100/".$conf->{$section}->{"limitDEM"},$format);
-	#}
 	}
 }
 
