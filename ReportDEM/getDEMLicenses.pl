@@ -1192,6 +1192,3 @@ sub makeChart {
 	$refWorkSheet = $refExcel->sheets(0);
 	$refWorkSheet->insert_chart('A1', $chart);
 }
-
-# GET with ManagementZone
-# curl -s -X GET -H "header=present; charset=utf-8" -H "Authorization:Api-Token RaeflA1bQayD63W3fiLLo" "https://nqd25551.live.dynatrace.com/api/v2/metrics/query?metricSelector=com.dynatrace.builtin:billing.apps.web.sessionsWithoutReplayByApplication:filter(eq(Type,Billed))&resolution=M&from=2020-08-01T00:00:00&to=2020-08-31T23:59:59&entitySelector=type(\"APPLICATION\"),mzName(\"SYNERGY\")"
